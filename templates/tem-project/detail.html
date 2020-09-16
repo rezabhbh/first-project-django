@@ -1,0 +1,17 @@
+{% extends 'tem-project/base.html' %}
+
+
+{% block main %}
+<div class="post-preview">
+  <h2 class="post-title">
+    {{articles.title}}
+  </h2>
+  <h3 class="post-subtitle">
+    {{articles.description|linebreaks}}
+  </h3>
+  <p class="post-meta">نوشته شده توسط
+    <a href="#">رضا</a>
+    {{art.publish}}</p>
+</div>
+<hr>
+{% endblock %}

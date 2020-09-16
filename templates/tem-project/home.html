@@ -1,0 +1,21 @@
+{% extends 'tem-project/base.html' %}
+
+
+{% block main %}
+{% for art in article %}
+<div class="post-preview">
+    <a href="{% url 'article:detail' art.slug %}">
+        <h2 class="post-title">
+            {{art.title}}
+        </h2>
+        <h3 class="post-subtitle">
+            {{art.description|truncatewords:20}}
+        </h3>
+    </a>
+    <p class="post-meta">نوشته شده توسط
+        <a href="#">رضا</a>
+        {{art.publish}}</p>
+</div>
+<hr>
+{% endfor %}
+{% endblock %}
