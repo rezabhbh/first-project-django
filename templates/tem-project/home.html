@@ -1,21 +1,59 @@
 {% extends 'tem-project/base.html' %}
+{%  load static %}
 
 
 {% block main %}
-{% for art in article %}
-<div class="post-preview">
-    <a href="{% url 'article:detail' art.slug %}">
-        <h2 class="post-title">
-            {{art.title}}
-        </h2>
-        <h3 class="post-subtitle">
-            {{art.description|truncatewords:20}}
-        </h3>
-    </a>
-    <p class="post-meta">نوشته شده توسط
-        <a href="#">رضا</a>
-        {{art.publish}}</p>
+<header class="masthead" style="background-image: url('{% static "static-files/img/home-bg.jpg" %}')">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="site-heading">
+                    <h1>Django</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            {% for art in article %}
+            <div class="post-preview">
+                <a href="{% url 'article:detail' art.slug %}">
+                    <h2 class="post-title">
+                        {{art.title}}
+                    </h2>
+                    <h3 class="post-subtitle">
+                        {{art.description|truncatewords:20}}
+                    </h3>
+                </a>
+                <p class="post-meta">نوشته شده توسط
+                    <a href="#">رضا</a>
+                    {{art.jpublish}}</p>
+                {% for cat in art.category.all %}
+                <a href="#">#{{cat.title}}</a>
+                {% endfor %}
+            </div>
+            <hr>
+
+            {% endfor %}
+
+            <!-- Pager -->
+
+            <div class="clearfix">
+                {% if article.has_next %}
+                <a class="btn btn-primary float-left mr-4" href="{% url 'article:home' article.next_page_number %}">صفحه
+                    بعدی &larr;</a>
+                {% endif %}
+                {% if article.has_previous %}
+                <a class="btn btn-primary float-right" href="{% url 'article:home' article.previous_page_number %}">
+                    &rarr; صفحه قبلی </a>
+                {% endif %}
+            </div>
+            {% endblock %}
+        </div>
+    </div>
 </div>
+
 <hr>
-{% endfor %}
-{% endblock %}

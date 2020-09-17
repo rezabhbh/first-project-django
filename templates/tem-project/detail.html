@@ -1,17 +1,37 @@
 {% extends 'tem-project/base.html' %}
-
+{% load static %}
 
 {% block main %}
-<div class="post-preview">
-  <h2 class="post-title">
-    {{articles.title}}
-  </h2>
-  <h3 class="post-subtitle">
-    {{articles.description|linebreaks}}
-  </h3>
-  <p class="post-meta">نوشته شده توسط
-    <a href="#">رضا</a>
-    {{art.publish}}</p>
+<header class="masthead" style="background-image: url('{{articles.thumbnail.url}}')">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="site-heading">
+          <h1>Django</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+      <div class="post-preview">
+        <h2 class="post-title">
+          {{articles.title}}
+        </h2>
+        <h3 class="post-subtitle">
+          {{articles.description|linebreaks}}
+        </h3>
+        <p class="post-meta">نوشته شده توسط
+          <a href="#">رضا</a>
+          {{articles.jpublish}}</p>
+      </div>
+      <hr>
+      {% endblock %}
+    </div>
+  </div>
 </div>
+
 <hr>
-{% endblock %}

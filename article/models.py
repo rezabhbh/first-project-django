@@ -1,7 +1,15 @@
 from django.db import models
 from django.utils import timezone
 from django.utils.html import format_html
+from extention.utils import convert_time_to_jalali
 
+class ArticleManager(models.Manager):
+    def published(self):
+        return self.filter(status='p')
+
+class CategoryManager(models.Manager):
+    def active(self):
+        return self.filter(status=True)
 
 class Category(models.Model):
     title = models.CharField(max_length=100, verbose_name="عنوان دسته بندی")
@@ -17,6 +25,8 @@ class Category(models.Model):
     def __str__(self):
         return self.title
 
+
+    objects = CategoryManager()
 
 
 class Article(models.Model):
@@ -47,3 +57,13 @@ class Article(models.Model):
     def thumbnail_tag(self):
         return format_html('<img src={} width=100>',format(self.thumbnail.url))
     thumbnail_tag.short_description = "عکس"
+
+    def category_to_str(self):
+        return ' , '.join([cat.title for cat in self.category.active()])
+    category_to_str.short_description = "دسته بندی"
+
+
+    def jpublish(self):
+        return convert_time_to_jalali(self.publish)
+
+    objects = ArticleManager()
