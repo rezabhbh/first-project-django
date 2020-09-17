@@ -31,8 +31,8 @@
                 <p class="post-meta">نوشته شده توسط
                     <a href="#">رضا</a>
                     {{art.jpublish}}</p>
-                {% for cat in art.category.all %}
-                <a href="#">#{{cat.title}}</a>
+                {% for cat in art.category.active %}
+                <a href="{% url 'article:category' cat.slug %}">#{{cat.title}}</a>
                 {% endfor %}
             </div>
             <hr>
