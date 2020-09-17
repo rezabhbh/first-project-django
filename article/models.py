@@ -66,4 +66,7 @@ class Article(models.Model):
     def jpublish(self):
         return convert_time_to_jalali(self.publish)
 
+    def category_published(self):
+        return self.category.active()
+
     objects = ArticleManager()
