@@ -18,7 +18,7 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-            {% for art in article %}
+            {% for art in object_list %}
             <div class="post-preview">
                 <a href="{% url 'article:detail' art.slug %}">
                     <h2 class="post-title">
@@ -31,26 +31,31 @@
                 <p class="post-meta">نوشته شده توسط
                     <a href="#">رضا</a>
                     {{art.jpublish}}</p>
-                {% for cat in art.category.active %}
-                <a href="{% url 'article:category' cat.slug %}">#{{cat.title}}</a>
-                {% endfor %}
+                <div class="category">
+                    {% for cat in art.category.active %}
+                    <a href="{% url 'article:category' cat.slug %}">#{{cat.title}}</a>
+                    {% endfor %}
+                </div>
             </div>
             <hr>
 
             {% endfor %}
 
             <!-- Pager -->
-
+            {% if is_paginated %}
             <div class="clearfix">
-                {% if article.has_next %}
-                <a class="btn btn-primary float-left mr-4" href="{% url 'article:home' article.next_page_number %}">صفحه
+                {% if page_obj.has_next %}
+                <a class="btn btn-primary float-left mr-4"
+                    href="{% url 'article:home' page_obj.next_page_number %}">صفحه
                     بعدی &larr;</a>
                 {% endif %}
-                {% if article.has_previous %}
-                <a class="btn btn-primary float-right" href="{% url 'article:home' article.previous_page_number %}">
+                {% if page_obj.has_previous %}
+                <a class="btn btn-primary float-right" href="{% url 'article:home' page_obj.previous_page_number %}">
                     &rarr; صفحه قبلی </a>
                 {% endif %}
             </div>
+            {% endif %}
+
             {% endblock %}
         </div>
     </div>
