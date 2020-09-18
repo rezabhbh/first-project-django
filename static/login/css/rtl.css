@@ -1,0 +1,16 @@
+@import url('https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css');
+
+body {
+    direction: rtl;
+    text-align: right;
+    font-family: Vazir !important;
+}
+
+.myfont,.focus-input100::after, .login100-form-btn, .login100-form-title {
+    font-family : Vazir !important;
+}
+
+.btn-show-pass {
+    left: 0;
+    right: auto;
+}
