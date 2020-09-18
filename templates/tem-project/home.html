@@ -1,64 +1,10 @@
-{% extends 'tem-project/base.html' %}
-{%  load static %}
+{% extends 'tem-project/list.html' %}
 
 
-{% block main %}
-<header class="masthead" style="background-image: url('{% static "static-files/img/home-bg.jpg" %}')">
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-md-10 mx-auto">
-                <div class="site-heading">
-                    <h1>Django</h1>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-            {% for art in object_list %}
-            <div class="post-preview">
-                <a href="{% url 'article:detail' art.slug %}">
-                    <h2 class="post-title">
-                        {{art.title}}
-                    </h2>
-                    <h3 class="post-subtitle">
-                        {{art.description|truncatewords:20}}
-                    </h3>
-                </a>
-                <p class="post-meta">نوشته شده توسط
-                    <a href="#">رضا</a>
-                    {{art.jpublish}}</p>
-                <div class="category">
-                    {% for cat in art.category.active %}
-                    <a href="{% url 'article:category' cat.slug %}">#{{cat.title}}</a>
-                    {% endfor %}
-                </div>
-            </div>
-            <hr>
+{% block next_page %}
+{% url 'article:home' page_obj.next_page_number %}
+{% endblock %}
 
-            {% endfor %}
-
-            <!-- Pager -->
-            {% if is_paginated %}
-            <div class="clearfix">
-                {% if page_obj.has_next %}
-                <a class="btn btn-primary float-left mr-4"
-                    href="{% url 'article:home' page_obj.next_page_number %}">صفحه
-                    بعدی &larr;</a>
-                {% endif %}
-                {% if page_obj.has_previous %}
-                <a class="btn btn-primary float-right" href="{% url 'article:home' page_obj.previous_page_number %}">
-                    &rarr; صفحه قبلی </a>
-                {% endif %}
-            </div>
-            {% endif %}
-
-            {% endblock %}
-        </div>
-    </div>
-</div>
-
-<hr>
+{% block previous_page %}
+{% url 'article:home' page_obj.previous_page_number %}
+{% endblock %}

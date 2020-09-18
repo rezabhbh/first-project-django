@@ -1,0 +1,64 @@
+{% extends 'tem-project/base.html' %}
+{%  load static %}
+
+
+{% block main %}
+<header class="masthead" style="background-image: url('{% static "static-files/img/home-bg.jpg" %}')">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="site-heading">
+                    <h1>{{category.title}}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            {% block header %} {% endblock %}
+            {% for art in object_list %}
+            <div class="post-preview">
+                <a href="{% url 'article:detail' art.slug %}">
+                    <h2 class="post-title">
+                        {{art.title}}
+                    </h2>
+                    <h3 class="post-subtitle">
+                        {{art.description|truncatewords:20}}
+                    </h3>
+                </a>
+                <p class="post-meta">نوشته شده توسط
+                    <a href="#">رضا</a>
+                    {{art.jpublish}}</p>
+                <div class="category">
+                    {% for cat in art.category.active %}
+                    <a href="{% url 'article:category' cat.slug %}">#{{cat.title}}</a>
+                    {% endfor %}
+                </div>
+            </div>
+            <hr>
+
+            {% endfor %}
+
+            <!-- Pager -->
+
+            <div class="clearfix">
+                {% if page_obj.has_next %}
+                <a class="btn btn-primary float-left mr-4"
+                    href="{% block next_page %} {% endblock %}">صفحه
+                    بعدی &larr;</a>
+                {% endif %}
+                {% if page_obj.has_previous %}
+                <a class="btn btn-primary float-right"
+                    href="{% block previous_page %} {% endblock %}">
+                    &rarr; صفحه قبلی </a>
+                {% endif %}
+            </div>
+            {% endblock %}
+        </div>
+    </div>
+</div>
+
+<hr>
