@@ -17,3 +17,11 @@ body{
     margin-left: inherit !important;
     margin-right: auto;
 }
+.post-meta {
+    text-align: left;
+    font-size: 17px !important;
+}
+
+.category {
+    font-size: 17px !important;
+}
