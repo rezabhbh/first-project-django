@@ -2,6 +2,8 @@ from django.contrib import admin
 from .models import Article, Category
 
 
+admin.site.site_header="مدیریت سایت"
+
 def make_publish(modeladmin, request, queryset):
     rows_updated = queryset.update(status = 'p')
     if rows_updated == 1:
@@ -23,11 +25,11 @@ make_draft.short_description = "پیش نویس مقاله"
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('title', 'slug', 'position', 'status')
+    list_display = ('title', 'slug', 'position', 'status', 'parent')
     list_filter = ('position', 'status')
     search_fields = ('title',)
     prepopulated_fields = {'slug':('title',)}
-    ordering = ['position']
+    ordering = ['parent']
 
 admin.site.register(Category, CategoryAdmin)
 
