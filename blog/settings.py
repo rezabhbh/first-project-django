@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'account.apps.AccountConfig',
     'article.apps.ArticleConfig',
     'extention',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
