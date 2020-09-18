@@ -964,3 +964,17 @@ table#change-history tbody th {
 .popup #header {
     padding: 10px 20px;
 }
+
+#header {
+    background: #a6a0f0;
+}
+
+#content-related .module h2 {
+    color: #c0e832;
+    background-color: #76e6f9;
+}
+
+.module h2, .module caption, .inline-group h2 {
+    background: #84cdf0;
+    color: #f7f5f3;
+}
